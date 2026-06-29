@@ -1,20 +1,24 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import ProtectedRoute from './components/ProtectedRoute'
 
+// Pages
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
 import Orders from './pages/Orders'
 import AddOrder from './pages/AddOrder'
-import CalendarPage from './pages/Calendar'
+import Calendar from './pages/Calendar'
 import Clients from './pages/Clients'
 import Team from './pages/Team'
 import Settings from './pages/Settings'
-import Layout from './components/Layout'
+import SubscriptionPage from './pages/SubscriptionPage'
+import ReferralPage from './pages/ReferralPage'
+import AnalyticsPage from './pages/AnalyticsPage'  // ✅ Yeh add kiya
+import ProtectedRoute from './components/ProtectedRoute'
 
-export default function App() {
+function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -24,27 +28,24 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* Protected Routes */}
-          <Route path="/app" element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<Navigate to="/app/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="orders/add" element={<AddOrder />} />
-            <Route path="orders/edit/:id" element={<AddOrder />} />
-            <Route path="calendar" element={<CalendarPage />} />
-            <Route path="clients" element={<Clients />} />
-            <Route path="team" element={<Team />} />
-            <Route path="settings" element={<Settings />} />
+          {/* Protected App Routes */}
+          <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+            <Route path="/app/dashboard" element={<Dashboard />} />
+            <Route path="/app/orders" element={<Orders />} />
+            <Route path="/app/orders/add" element={<AddOrder />} />
+            <Route path="/app/orders/edit/:id" element={<AddOrder />} />
+            <Route path="/app/calendar" element={<Calendar />} />
+            <Route path="/app/clients" element={<Clients />} />
+            <Route path="/app/team" element={<Team />} />
+            <Route path="/app/settings" element={<Settings />} />
+            <Route path="/app/subscription" element={<SubscriptionPage />} />
+            <Route path="/app/referral" element={<ReferralPage />} />
+            <Route path="/app/analytics" element={<AnalyticsPage />} />  // ✅ Yeh line add karo
           </Route>
-
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
   )
 }
+
+export default App

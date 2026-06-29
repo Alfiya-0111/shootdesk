@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { collection, query, getDocs, orderBy } from 'firebase/firestore'
 import { db } from '../firebase/config'
 import { useAuth } from '../context/AuthContext'
-import { MdAdd, MdArrowForward } from 'react-icons/md'
+import { MdAdd, MdArrowForward, MdBarChart } from 'react-icons/md'
 
 const STATUS_COLORS = {
   Confirmed: '#3B82F6',
@@ -111,6 +111,52 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      {/* ✅ Analytics Card */}
+      <Link to="/app/analytics" style={{ textDecoration: 'none' }}>
+        <div style={{
+          background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+          border: '1px solid var(--border)',
+          borderRadius: 14,
+          padding: 16,
+          marginBottom: 20,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+          transition: 'transform 0.2s, border-color 0.2s',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = 'translateY(-2px)'
+          e.currentTarget.style.borderColor = 'var(--purple)'
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = 'translateY(0)'
+          e.currentTarget.style.borderColor = 'var(--border)'
+        }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <div style={{
+              width: 44,
+              height: 44,
+              borderRadius: 12,
+              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <MdBarChart size={24} color="#fff" />
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--text1)' }}>Analytics & Reports</div>
+              <div style={{ fontSize: 12, color: 'var(--text3)', marginTop: 2 }}>
+                Revenue trends, shoot types & monthly stats
+              </div>
+            </div>
+          </div>
+          <MdArrowForward size={20} color="var(--purple2)" />
+        </div>
+      </Link>
 
       {/* Today Alert */}
       {todayOrders.length > 0 && (

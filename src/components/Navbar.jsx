@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom'
-import { MdDashboard, MdListAlt, MdCalendarMonth, MdPeople, MdSettings } from 'react-icons/md'
+import { MdDashboard, MdListAlt, MdCalendarMonth, MdPeople, MdCardGiftcard, MdSettings } from 'react-icons/md'
 
 const tabs = [
   { to: '/app/dashboard', icon: <MdDashboard size={22} />, label: 'Home' },
   { to: '/app/orders',    icon: <MdListAlt size={22} />,    label: 'Orders' },
   { to: '/app/calendar',  icon: <MdCalendarMonth size={22} />, label: 'Calendar' },
   { to: '/app/clients',   icon: <MdPeople size={22} />,     label: 'Clients' },
+  { to: '/app/referral',  icon: <MdCardGiftcard size={22} />, label: 'Earn' },
   { to: '/app/settings',  icon: <MdSettings size={22} />,   label: 'Settings' },
 ]
 
